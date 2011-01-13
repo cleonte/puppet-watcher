@@ -43,6 +43,11 @@ def puppet_watch dir
 end
 
 if __FILE__ == $0
+   unless ARGV.length == 1
+     puts " Please specify the directory to watch"
+     puts " Usage: puppet-watcher directory"
+     exit
+   end
         directory=ARGV[0]
 	puppet_watch "#{directory}"
 
