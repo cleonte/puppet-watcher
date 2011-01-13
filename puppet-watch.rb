@@ -1,4 +1,4 @@
-#!/usr/bin/ruby -w
+#!/usr/bin/ruby 
 #http://jetpackweb.com/blog/tags/lib-notify/
 #https://github.com/AhmedElGamil/puppet-growl
 #gem install eventmachine  em-dir-watcher rb-inotify
@@ -17,25 +17,34 @@ def notify stock_icon, title, message
 end
  
 
-dir = "/home/cleonte/work/puppet"
 
-EM.run {
-  dw = EMDirWatcher.watch File.expand_path(dir), :include_only => ['*.pp'] do |paths|
-    paths.each do |path|
-      full_path = File.join(dir, path)
+def puppet_watch dir
+  puts "Watching #{dir}"
+  EM.run do
+   dw = EMDirWatcher.watch File.expand_path(dir), :include_only => ['*.pp'] do |paths|
+     paths.each do |path|
+       full_path = File.join(dir, path)
    
       
-      result = `puppet --parseonly #{full_path}`.chomp
+       result = `puppet --parseonly #{full_path}`.chomp
     
 
-      if result.any?
+       if result.any?
 
-	notify ERROR_STOCK_ICON, "Puppet", "Syntax Problem, Manifest #{full_path}: #{result}"
+	 notify ERROR_STOCK_ICON, "Puppet", "Syntax Problem, Manifest #{full_path}: #{result}"
 	
-      else
-	notify SUCCESS_STOCK_ICON, "Puppet", "Manifest #{full_path}: Syntax OK"
+       else
+ 	notify SUCCESS_STOCK_ICON, "Puppet", "Manifest #{full_path}: Syntax OK"
         
-      end      
-    end    
-  end
-}
+       end      
+     end    
+   end
+ end
+end
+
+if __FILE__ == $0
+        directory=ARGV[0]
+	puppet_watch "#{directory}"
+
+
+end
