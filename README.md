@@ -9,8 +9,7 @@
 
 1. ``` sudo apt-get install g++ ruby1.8-dev  libnotify-bin```
 2. ``` sudo gem install eventmachine  em-dir-watcher rb-inotify```
-3. Edit the "dir" variable in puppet-watch.rb with the full path of your puppet manifests.
-4. Run the script: ``` ruby puppet-watch.rb```
+3. Run the script: ``` ruby puppet-watch.rb directory```
 
 ### Thanks 
 * Based on AhmedElGamil https://github.com/AhmedElGamil/puppet-growl/blob/master/README.md
