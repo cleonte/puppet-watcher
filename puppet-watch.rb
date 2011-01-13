@@ -45,7 +45,7 @@ end
 if __FILE__ == $0
    unless ARGV.length == 1
      puts " Please specify the directory to watch"
-     puts " Usage: puppet-watcher directory"
+     puts " Usage: ruby puppet-watch.rb directory_to_watch"
      exit
    end
         directory=ARGV[0]
