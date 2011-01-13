@@ -12,6 +12,6 @@
 3. Edit the "dir" variable in puppet-watch.rb with the full path of your puppet manifests.
 4. Run the script: ``` ruby puppet-watch.rb```
 
-### TODO
+
 * Based on AhmedElGamil https://github.com/AhmedElGamil/puppet-growl/blob/master/README.md
 
